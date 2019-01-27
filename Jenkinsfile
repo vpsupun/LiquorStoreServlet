@@ -6,6 +6,7 @@ pipeline {
     stage("preflight") {
       steps {
         echo "Preflight"
+        sh "ls -al"
       }
     }
   }
