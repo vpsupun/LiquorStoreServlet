@@ -44,6 +44,24 @@ pipeline {
         echo "Placeholder for Nexus IQ Scan"
       }
     }
+	stage("Deploy Test") {
+      steps {
+        echo "Deploy Test"
+ 
+      }
+    }
+	stage("Functional Tests") {
+      steps {
+        echo "Functional Tests"
+        echo "Placeholder for Functional Tests"
+      }
+    }
+	stage("Tear Down") {
+      steps {
+        echo "Tear Down"
+
+      }
+    }
     stage('Publishing') {
       steps {
         nexusPublisher nexusInstanceId: 'localNexus', nexusRepositoryId: 'sia', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './target/SampleServlet.war']], mavenCoordinate: [artifactId: 'SampleServlet', groupId: 'com.sia', packaging: 'war', version: '1.1']]] 
