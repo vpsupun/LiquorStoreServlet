@@ -11,7 +11,8 @@ pipeline {
         echo "Preflight"
         sh "ls -al"
       }
-    } stage("Build") {
+    }
+    stage("Build") {
       steps {
         echo "Build"
         sh "${MVN} clean build"
