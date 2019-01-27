@@ -26,7 +26,6 @@ pipeline {
     }
     stage("Static Analysis") {
       steps {
-        echo "Static Analysis"
         parallel(
           SonarScan: {
             echo "Placeholder for Sonar Scan"
