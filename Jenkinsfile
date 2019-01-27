@@ -15,7 +15,7 @@ pipeline {
     stage("Build") {
       steps {
         echo "Build"
-        sh "${MVN} mvn clean install -DskipTests"
+        sh "${MVN} clean install -DskipTests"
       }
     }
     stage("Unit Tests") {
