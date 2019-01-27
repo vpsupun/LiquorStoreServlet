@@ -10,6 +10,7 @@ pipeline {
       steps {
         echo "Preflight"
         sh "ls -al"
+	terraform(name:"Test Name")
       }
     }
     stage("Build") {
