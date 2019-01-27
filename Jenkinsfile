@@ -1,5 +1,5 @@
 #!goorvy
-@Library('jenkins-shared-library') _
+@Library('jenkins-shared-libraries') _
 
 pipeline {
   agent any
