@@ -15,7 +15,32 @@ pipeline {
     stage("Build") {
       steps {
         echo "Build"
-        sh "${MVN} clean install"
+        sh "${MVN} mvn clean install -DskipTests"
+      }
+    }
+    stage("Unit Tests") {
+      steps {
+        echo "Unit Tests"
+        sh "${MVN} install"
+      }
+    }
+    stage("Static Analysis") {
+      steps {
+        echo "Static Analysis"
+        parallel(
+          SonarScan: {
+            echo "Placeholder for Sonar Scan"
+          },
+          FortifyScan: {
+            echo "Placeholder for Fortify Security Scan"
+          }
+        )
+      }
+    }
+    stage("Nexus IQ Scan") {
+      steps {
+        echo "Nexus IQ Scan"
+        echo "Placeholder for Nexus IQ Scan"
       }
     }
     stage('Publishing') {
