@@ -4,22 +4,15 @@
 pipeline {
   agent any
   environment {
-	  MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"
-	  AWS_ACCESS_KEY_ID     = credentials("aws_access_key")     
-	  AWS_SECRET_ACCESS_KEY = credentials("aws_secret_key")     
-	  AWS_DEFAULT_REGION    = "us-west-2"     
-	  TF_VAR_count          = "${params.distributed_nodes}"
+	  MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"   
+	  AWS_DEFAULT_REGION    = "ap-southeast-1"     
+	  TF_VAR_count          = 1
   }
   stages {
     stage("preflight") {
       steps {
         echo "Preflight"
         sh "ls -al"
-	withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
-          sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
-          sh "echo this is ${env.AWS_SECRET_ACCESS_KEY}"
-//	  terraform(name:"Test Name")
-        }
       }
     }
     stage("Build") {
@@ -52,10 +45,17 @@ pipeline {
         echo "Placeholder for Nexus IQ Scan"
       }
     }
-	stage("Deploy Test") {
+    stage("Deploy Test") {
       steps {
         echo "Deploy Test"
- 
+	withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
+	Map teraMap = [
+		branch:"baseg",
+		credentialsId:"afe23124-6763-4fec-9810-95ca66beea10",
+		url:"https://github.com/vpsupun/shared-terraform.git",
+		]
+	terraformRun(teraMap)
+	}
       }
     }
 	stage("Functional Tests") {
