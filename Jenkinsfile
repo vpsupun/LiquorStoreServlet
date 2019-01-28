@@ -48,12 +48,11 @@ pipeline {
     stage("Deploy Test") {
       steps {
         echo "Deploy Test"
+				Map teraMap = [branch:"baseg",
+											 credentialsId:"afe23124-6763-4fec-9810-95ca66beea10",
+											 url:"https://github.com/vpsupun/shared-terraform.git"
+											]
 				withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
-					Map teraMap = [
-						branch:"baseg",
-						credentialsId:"afe23124-6763-4fec-9810-95ca66beea10",
-						url:"https://github.com/vpsupun/shared-terraform.git",
-					]
 					terraformRun(teraMap)
 				}
       }
