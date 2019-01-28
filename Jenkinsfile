@@ -53,8 +53,9 @@ pipeline {
       steps {
         echo "Deploy Test"
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
-	echo "Going in"
+	echo "Terraform provisioning"
         terraformRun(teraMap, "deploy")
+	echo "Ansible deployment"
 	ansibleRun(ansiMap, "deploy.yml", "./target/SampleServlet.war")
         }
       }
