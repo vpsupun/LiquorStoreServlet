@@ -55,6 +55,7 @@ pipeline {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
 	echo "Terraform provisioning"
         terraformRun(teraMap, "deploy")
+	sh "sleep 60"
 	echo "Ansible deployment"
 	ansibleRun(ansiMap, "deploy.yml", './target/SampleServlet.war')
         }
