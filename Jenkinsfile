@@ -4,8 +4,7 @@
 pipeline {
   agent any
   environment {
-    MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"
-	
+	  MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"
 	  AWS_ACCESS_KEY_ID     = credentials("aws_access_key")     
 	  AWS_SECRET_ACCESS_KEY = credentials("aws_secret_key")     
 	  AWS_DEFAULT_REGION    = "us-west-2"     
@@ -16,7 +15,11 @@ pipeline {
       steps {
         echo "Preflight"
         sh "ls -al"
-	terraform(name:"Test Name")
+	withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
+          sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
+          sh "echo this is ${env.AWS_SECRET_ACCESS_KEY}"
+//	  terraform(name:"Test Name")
+        }
       }
     }
     stage("Build") {
