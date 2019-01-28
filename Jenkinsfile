@@ -5,6 +5,11 @@ pipeline {
   agent any
   environment {
     MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"
+	
+	  AWS_ACCESS_KEY_ID     = credentials("aws_access_key")     
+	  AWS_SECRET_ACCESS_KEY = credentials("aws_secret_key")     
+	  AWS_DEFAULT_REGION    = "us-west-2"     
+	  TF_VAR_count          = "${params.distributed_nodes}"
   }
   stages {
     stage("preflight") {
