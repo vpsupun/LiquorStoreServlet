@@ -52,7 +52,7 @@ pipeline {
         echo "Deploy Test"
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
 	echo "Going in"
-        terraformRun(teraMap)
+        terraformRun(teraMap, "deploy")
         }
       }
     }
@@ -60,11 +60,16 @@ pipeline {
       steps {
         echo "Functional Tests"
         echo "Placeholder for Functional Tests"
+	sh "sleep 60"
       }
     }
     stage("Tear Down") {
       steps {
         echo "Tear Down"
+	withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
+	echo "Going in"
+        terraformRun(teraMap, "destroy")
+        }
       }
     }
     stage('Publishing') {
