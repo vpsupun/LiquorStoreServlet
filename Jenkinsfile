@@ -56,7 +56,7 @@ pipeline {
 	echo "Terraform provisioning"
         terraformRun(teraMap, "deploy")
 	echo "Ansible deployment"
-	ansibleRun(ansiMap, "deploy.yml", ".\/target\/SampleServlet.war")
+	ansibleRun(ansiMap, "deploy.yml", "test.war")
         }
       }
     }
