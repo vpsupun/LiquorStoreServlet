@@ -48,23 +48,23 @@ pipeline {
     stage("Deploy Test") {
       steps {
         echo "Deploy Test"
-	withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
-	Map teraMap = [
-		branch:"baseg",
-		credentialsId:"afe23124-6763-4fec-9810-95ca66beea10",
-		url:"https://github.com/vpsupun/shared-terraform.git",
-		]
-	terraformRun(teraMap)
-	}
+				withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
+					Map teraMap = [
+						branch:"baseg",
+						credentialsId:"afe23124-6763-4fec-9810-95ca66beea10",
+						url:"https://github.com/vpsupun/shared-terraform.git",
+					]
+					terraformRun(teraMap)
+				}
       }
-    }
-	stage("Functional Tests") {
+		}
+		stage("Functional Tests") {
       steps {
         echo "Functional Tests"
         echo "Placeholder for Functional Tests"
       }
     }
-	stage("Tear Down") {
+		stage("Tear Down") {
       steps {
         echo "Tear Down"
 
