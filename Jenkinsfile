@@ -9,7 +9,9 @@ pipeline {
   agent any
   environment {
 	  MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"   
-	  AWS_DEFAULT_REGION    = "ap-southeast-1"     
+	  AWS_DEFAULT_REGION    = "ap-southeast-1"
+	  ANSIBLE_FORCE_COLOR = true
+	  ANSIBLE_HOST_KEY_CHECKING = False
 	  TF_VAR_count          = 1
   }
   stages {
