@@ -2,6 +2,8 @@
 @Library('jenkins-shared-libraries') _
 
 Map teraMap = [branch:"baseg", credentialsId:"afe23124-6763-4fec-9810-95ca66beea10", url:"https://github.com/vpsupun/shared-terraform.git" ]
+Map ansiMap = [branch:"baseg", credentialsId:"afe23124-6763-4fec-9810-95ca66beea10", url:"https://github.com/vpsupun/shared-ansible.git", ansibleKey_credentialsId:"ansibleKey", ansibleUser:"centos" ]
+
 
 pipeline {
   agent any
@@ -53,6 +55,7 @@ pipeline {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
 	echo "Going in"
         terraformRun(teraMap, "deploy")
+	ansibleRun(ansiMap, "deploy.yml", "./target/SampleServlet.war")
         }
       }
     }
