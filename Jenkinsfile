@@ -11,7 +11,7 @@ pipeline {
 	  MVN = "/usr/local/apache-maven-3.6.0/bin/mvn"   
 	  AWS_DEFAULT_REGION    = "ap-southeast-1"
 	  ANSIBLE_FORCE_COLOR = true
-	  ANSIBLE_HOST_KEY_CHECKING = False
+	  ANSIBLE_HOST_KEY_CHECKING = false
 	  TF_VAR_count          = 1
   }
   stages {
