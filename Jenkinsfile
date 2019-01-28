@@ -50,21 +50,21 @@ pipeline {
     stage("Deploy Test") {
       steps {
         echo "Deploy Test"
-				withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
-					terraformRun(teraMap)
-				}
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'sia_creds']]) {
+	echo "Going in"
+        terraformRun(teraMap)
+        }
       }
-		}
-		stage("Functional Tests") {
+    }
+    stage("Functional Tests") {
       steps {
         echo "Functional Tests"
         echo "Placeholder for Functional Tests"
       }
     }
-		stage("Tear Down") {
+    stage("Tear Down") {
       steps {
         echo "Tear Down"
-
       }
     }
     stage('Publishing') {
