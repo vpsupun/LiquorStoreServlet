@@ -3,6 +3,7 @@
 
 Map teraMap = [branch:"baseg", credentialsId:"afe23124-6763-4fec-9810-95ca66beea10", url:"https://github.com/vpsupun/shared-terraform.git" ]
 Map ansiMap = [branch:"baseg", credentialsId:"afe23124-6763-4fec-9810-95ca66beea10", url:"https://github.com/vpsupun/shared-ansible.git", ansibleKey_credentialsId:"ansibleKey", ansibleUser:"centos" ]
+String artifactPath = "${env.WORKSPACE}/target/SampleServlet.war"
 
 
 pipeline {
@@ -59,7 +60,6 @@ pipeline {
         terraformRun(teraMap, "deploy")
 	sh "sleep 60"
 	echo "Ansible deployment"
-	String artifactPath = "${env.WORKSPACE}/target/SampleServlet.war"
 	ansibleRun(ansiMap, "deploy.yml", artifactPath)
         }
       }
