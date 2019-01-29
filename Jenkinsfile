@@ -59,7 +59,7 @@ pipeline {
         terraformRun(teraMap, "deploy")
 	sh "sleep 60"
 	echo "Ansible deployment"
-	ansibleRun(ansiMap, "deploy.yml", './target/SampleServlet.war')
+	ansibleRun(ansiMap, "deploy.yml", '${env.WORKSPACE}/target/SampleServlet.war')
         }
       }
     }
